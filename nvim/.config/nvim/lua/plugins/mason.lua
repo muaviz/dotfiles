@@ -6,6 +6,7 @@ return {
         "clangd",
         "codelldb",
         "clang-format",
+        "black",
       },
     },
   },
