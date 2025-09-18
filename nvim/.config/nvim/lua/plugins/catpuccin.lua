@@ -49,8 +49,9 @@ return {
         "akinsho/bufferline.nvim",
         optional = true,
         opts = function(_, opts)
-          if (vim.g.colors_name or ""):find("catppuccin") then
-            opts.highlights = require("catppuccin.groups.integrations.bufferline").get()
+          local catppuccin_integration = require("catppuccin.groups.integrations.bufferline")
+          if (vim.g.colors_name or ""):find("catppuccin") and catppuccin_integration.get then
+            opts.highlights = catppuccin_integration.get()
           end
         end,
       },
