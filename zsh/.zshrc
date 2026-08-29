@@ -107,6 +107,9 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
+alias kitty='~/.local/kitty.app/bin/kitty'
+alias webcam='scrcpy --video-source=camera --v4l2-sink=/dev/video0 --camera-size=1920x1080 -b 1M --camera-fps=30 --camera-id=0 --video-codec=h264 --no-audio --no-playback --disable-screensaver'
+#
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
@@ -115,7 +118,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Created by `pipx` on 2025-05-18 07:20:35
 #export PATH="$PATH:/home/muaviz/.local/bin"
-
+export PATH="$HOME/.cargo/bin:$PATH"
 
 
 
@@ -125,7 +128,32 @@ export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
 
-eval "$(zoxide init --cmd cd zsh)"
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
+# opencode
+export PATH=/home/muaviz/.opencode/bin:$PATH
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/muaviz/.local/bin:$PATH"
+
+# bun completions
+[ -s "/home/muaviz/.bun/_bun" ] && source "/home/muaviz/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+
+# pnpm
+export PNPM_HOME="/home/muaviz/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end
+export PATH="$(npm config get prefix)/bin:$PATH"
+

@@ -11,3 +11,5 @@
 	helper = !/home/muaviz/.local/bin/gh auth git-credential
 [pull]
 	rebase = true
+[core]
+	editor = nvim
