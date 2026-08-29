@@ -3,4 +3,10 @@ return {
   dependencies = {
     "nvim-telescope/telescope.nvim",
   },
+  config = function()
+    LazyVim.on_load("telescope.nvim", function()
+      require("telescope").load_extension("project")
+    end)
+  end,
 }
+

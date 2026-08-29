@@ -4,13 +4,20 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
   },
-  config = function()
-    require("codecompanion").setup({
-      strategies = {
-        chat = { adapter = "ollama" },
-        inline = { adapter = "ollama" },
-      },
-      adapters = {
+  cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionCmd", "CodeCompanionActions" },
+  keys = {
+    { "<leader>ac", "<cmd>CodeCompanionChat Toggle<cr>", mode = { "n", "v" }, desc = "CodeCompanion Chat" },
+    { "<leader>ae", "<cmd>CodeCompanion /explain<cr>", mode = "v", desc = "CodeCompanion Explain" },
+    { "<leader>ai", "<cmd>CodeCompanion<cr>", mode = { "n", "v" }, desc = "CodeCompanion Inline" },
+    { "<leader>aa", "<cmd>CodeCompanionActions<cr>", mode = { "n", "v" }, desc = "CodeCompanion Actions" },
+  },
+  opts = {
+    strategies = {
+      chat = { adapter = "ollama" },
+      inline = { adapter = "ollama" },
+    },
+    adapters = {
+      http = {
         ollama = function()
           return require("codecompanion.adapters").extend("ollama", {
             env = {
@@ -18,17 +25,13 @@ return {
             },
             schema = {
               model = {
-                default = "deepseek-coder", -- Put your model here
+                default = "deepseek-coder",
               },
             },
           })
         end,
       },
-    })
-
-    -- Keymaps similar to your old setup
-    vim.keymap.set({ "n", "v" }, "<leader>c", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
-    vim.keymap.set("v", "<leader>e", "<cmd>CodeCompanion /explain<cr>", { noremap = true, silent = true })
-    vim.keymap.set("v", "<leader>r", "<cmd>CodeCompanion<cr>", { noremap = true, silent = true })
-  end,
+    },
+  },
 }
+

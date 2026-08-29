@@ -1,6 +1,6 @@
 return {
   {
-    "catppuccin",
+    "catppuccin/nvim",
     lazy = false,
     name = "catppuccin",
     opts = {
@@ -42,18 +42,6 @@ return {
         treesitter = true,
         treesitter_context = true,
         which_key = true,
-      },
-    },
-    specs = {
-      {
-        "akinsho/bufferline.nvim",
-        optional = true,
-        opts = function(_, opts)
-          local catppuccin_integration = require("catppuccin.groups.integrations.bufferline")
-          if (vim.g.colors_name or ""):find("catppuccin") and catppuccin_integration.get then
-            opts.highlights = catppuccin_integration.get()
-          end
-        end,
       },
     },
   },

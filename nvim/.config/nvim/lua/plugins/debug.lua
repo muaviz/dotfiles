@@ -1,44 +1,46 @@
 return {
   "mfussenegger/nvim-dap",
   dependencies = {
-    {
-      "nvim-neotest/nvim-nio",
-    },
+    "nvim-neotest/nvim-nio",
     {
       "rcarriga/nvim-dap-ui",
-      config = function()
-        require("dapui").setup()
+      opts = {},
+      config = function(_, opts)
+        local dap = require("dap")
+        local dapui = require("dapui")
+        dapui.setup(opts)
+
+        dap.listeners.after.event_initialized["dapui_config"] = function()
+          dapui.open()
+        end
+        dap.listeners.before.event_terminated["dapui_config"] = function()
+          dapui.close()
+        end
+        dap.listeners.before.event_exited["dapui_config"] = function()
+          dapui.close()
+        end
       end,
     },
   },
+  keys = {
+    { "<leader>dt", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
+    { "<leader>dc", function() require("dap").continue() end, desc = "Continue / Start" },
+  },
   config = function()
     local dap = require("dap")
-    local dapui = require("dapui")
-
-    -- UI open/close logic
-    dap.listeners.before.attach.dapui_config = function()
-      dapui.open()
-    end
-    dap.listeners.before.launch.dapui_config = function()
-      dapui.open()
-    end
-    dap.listeners.before.event_terminated.dapui_config = function()
-      dapui.close()
-    end
-    dap.listeners.before.event_exited.dapui_config = function()
-      dapui.close()
-    end
-
-    -- Keybindings
-    vim.keymap.set("n", "<Leader>dt", dap.toggle_breakpoint, {})
-    vim.keymap.set("n", "<Leader>dc", dap.continue, {})
 
     -- DAP Adapter for codelldb
-    dap.adapters.codelldb = {
-      type = "executable",
-      command = "codelldb", -- change this if it's not in your PATH
-      name = "codelldb",
-    }
+    if not dap.adapters.codelldb then
+      dap.adapters.codelldb = {
+        type = "server",
+        host = "localhost",
+        port = "${port}",
+        executable = {
+          command = "codelldb",
+          args = { "--port", "${port}" },
+        },
+      }
+    end
 
     -- C++ Debug Configuration
     dap.configurations.cpp = {
@@ -55,8 +57,9 @@ return {
       },
     }
 
-    -- Optional: Also apply this config for C and Rust
+    -- Also apply this config for C and Rust
     dap.configurations.c = dap.configurations.cpp
     dap.configurations.rust = dap.configurations.cpp
   end,
 }
+
