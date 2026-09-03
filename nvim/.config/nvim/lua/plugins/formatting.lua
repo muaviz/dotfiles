@@ -8,7 +8,8 @@ return {
       },
       formatters = {
         jack_format = {
-          command = vim.fn.stdpath("config") .. "/bin/jack-format.py",
+          command = vim.fn.executable("jack-format") == 1 and "jack-format"
+            or (vim.fn.stdpath("config") .. "/bin/jack-format.py"),
           stdin = true,
         },
       },
