@@ -5,8 +5,11 @@ return {
       local null_ls = require("null-ls")
       opts.sources = opts.sources or {}
       vim.list_extend(opts.sources, {
-        null_ls.builtins.formatting.clang_format,
+        null_ls.builtins.formatting.clang_format.with({
+          filetypes = { "c", "cpp", "cuda" },
+        }),
         null_ls.builtins.formatting.black,
+        null_ls.builtins.formatting.google_java_format,
       })
     end,
   },

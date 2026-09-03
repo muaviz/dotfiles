@@ -12,6 +12,7 @@ return {
         "clang-format",
         "stylua",
         "shfmt",
+        "google-java-format",
       })
     end,
   },

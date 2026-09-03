@@ -4,6 +4,7 @@ return {
     ensure_installed = {
       "cpp",
       "python",
+      "java",
     },
   },
 }
