@@ -36,6 +36,17 @@ return {
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         },
       },
+      formats = {
+        header = { "%s", align = "center", hl = "Green" },
+      },
     },
   },
+  init = function()
+    vim.api.nvim_create_autocmd("ColorScheme", {
+      pattern = "*",
+      callback = function()
+        vim.api.nvim_set_hl(0, "SnacksDashboardHeader", { link = "Green" })
+      end,
+    })
+  end,
 }

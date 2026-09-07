@@ -89,11 +89,16 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='nvim'
-# fi
+export EDITOR='nvim'
+export VISUAL='nvim'
+export BAT_THEME='gruvbox-dark'
+
+# FZF Gruvbox Material theme
+export FZF_DEFAULT_OPTS=" \
+  --color=bg+:#3c3836,bg:#282828,spinner:#d49b6a,hl:#ea6962 \
+  --color=fg:#ebdbb2,header:#ea6962,info:#d49b6a,pointer:#d49b6a \
+  --color=marker:#d49b6a,fg+:#fbf1c7,prompt:#d49b6a,hl+:#ea6962 \
+  --prompt='❯ ' --pointer='▶' --marker='✓'"
 
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"

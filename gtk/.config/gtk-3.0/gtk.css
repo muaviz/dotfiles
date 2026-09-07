@@ -36,3 +36,7 @@ terminal-window decoration {
 
 /*** safesintesi's guillotine - end ***/
 
+
+/* Gruvbox Smoked Amber Accent for GTK3 */
+@define-color theme_selected_bg_color #c37d38;
+@define-color theme_selected_fg_color #fbf1c7;
