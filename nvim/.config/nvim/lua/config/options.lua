@@ -4,3 +4,6 @@
 
 vim.g.lazyvim_picker = "telescope"
 vim.g.lazyvim_python_lsp = "pyright"
+
+-- Use xclip to interface with Xwayland clipboard bridge, eliminating Wayland window restacking flicker
+vim.g.clipboard = "xclip"
